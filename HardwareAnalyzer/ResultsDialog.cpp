@@ -2,7 +2,7 @@
 #include "ResultsDialog.h"
 
 using namespace winrt;
-using namespace winrt::Windows::ApplicationModel::Resources;
+using namespace winrt::Microsoft::Windows::ApplicationModel::Resources;
 using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Controls;
 
