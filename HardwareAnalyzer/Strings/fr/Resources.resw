@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitleBarText.Text" xml:space="preserve">
+    <value>Analyseur de matériel</value>
+  </data>
+  <data name="DropPromptTitle.Text" xml:space="preserve">
+    <value>Déposez une capture d'écran ici</value>
+  </data>
+  <data name="DropPromptSubtitle.Text" xml:space="preserve">
+    <value>Paramètres Windows &gt; Système &gt; A propos</value>
+  </data>
+  <data name="BrowseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Parcourir pour une image</value>
+  </data>
+  <data name="BrowseButtonText.Text" xml:space="preserve">
+    <value>Parcourir</value>
+  </data>
+  <data name="AnalyzeButtonText.Text" xml:space="preserve">
+    <value>Analyser</value>
+  </data>
+  <data name="LoadingText.Text" xml:space="preserve">
+    <value>Analyse de l'image...</value>
+  </data>
+  <data name="ResultsDialogTitle" xml:space="preserve">
+    <value>Résultats de l'analyse matérielle</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Appareil : </value>
+  </data>
+  <data name="GlobalScoreLabel" xml:space="preserve">
+    <value>Score global: </value>
+  </data>
+  <data name="ScoreExcellent" xml:space="preserve">
+    <value>Excellente configuration matérielle !</value>
+  </data>
+  <data name="ScoreGood" xml:space="preserve">
+    <value>Bon matériel, prèoccupations mineures.</value>
+  </data>
+  <data name="ScoreAcceptable" xml:space="preserve">
+    <value>Acceptable, quelques limitations.</value>
+  </data>
+  <data name="ScoreBelowAverage" xml:space="preserve">
+    <value>En dessous de la moyenne, problèmes possibles.</value>
+  </data>
+  <data name="ScoreSignificantConcerns" xml:space="preserve">
+    <value>Préoccupations matérielles importantes.</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ErrorAnalyzePrefix" xml:space="preserve">
+    <value>Echec de l'analyse de l'image : </value>
+  </data>
+  <data name="OKButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="HW_Processor" xml:space="preserve">
+    <value>Processeur</value>
+  </data>
+  <data name="HW_GraphicsCard" xml:space="preserve">
+    <value>Carte graphique</value>
+  </data>
+  <data name="HW_RAM" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="HW_VideoMemory" xml:space="preserve">
+    <value>Mémoire vidéo</value>
+  </data>
+  <data name="HW_Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="Reason_CPUNotFound" xml:space="preserve">
+    <value>Information CPU non trouvée</value>
+  </data>
+  <data name="Reason_QualcommARM" xml:space="preserve">
+    <value>Processeur ARM Qualcomm - compatibilité limitée</value>
+  </data>
+  <data name="Reason_ModernIntel" xml:space="preserve">
+    <value>CPU Intel moderne</value>
+  </data>
+  <data name="Reason_OlderIntel" xml:space="preserve">
+    <value>CPU Intel ancien (avant 2020)</value>
+  </data>
+  <data name="Reason_ModernRyzen" xml:space="preserve">
+    <value>CPU AMD Ryzen moderne</value>
+  </data>
+  <data name="Reason_OlderRyzen" xml:space="preserve">
+    <value>AMD Ryzen ancien (avant 2020)</value>
+  </data>
+  <data name="Reason_LowPerfCPU" xml:space="preserve">
+    <value>Famille de CPU à faibles performances</value>
+  </data>
+  <data name="Reason_VeryOldCPU" xml:space="preserve">
+    <value>CPU très ancien (ère Core 2)</value>
+  </data>
+  <data name="Reason_CPUDetected" xml:space="preserve">
+    <value>CPU détecté</value>
+  </data>
+  <data name="Reason_GPUNotFound" xml:space="preserve">
+    <value>Information GPU non trouvée</value>
+  </data>
+  <data name="Reason_QualcommAdreno" xml:space="preserve">
+    <value>GPU Qualcomm Adreno - architecture ARM</value>
+  </data>
+  <data name="Reason_IntelArc" xml:space="preserve">
+    <value>GPU dédié Intel Arc</value>
+  </data>
+  <data name="Reason_IntelIris" xml:space="preserve">
+    <value>Graphiques intégrés Intel Iris</value>
+  </data>
+  <data name="Reason_IntelUHD" xml:space="preserve">
+    <value>Graphiques intégrés Intel UHD</value>
+  </data>
+  <data name="Reason_IntelIntegrated" xml:space="preserve">
+    <value>Graphiques intégrés Intel</value>
+  </data>
+  <data name="Reason_NVIDIADedicated" xml:space="preserve">
+    <value>GPU dédié NVIDIA</value>
+  </data>
+  <data name="Reason_AMDVega" xml:space="preserve">
+    <value>Graphiques intégrés AMD Vega</value>
+  </data>
+  <data name="Reason_AMDRadeon" xml:space="preserve">
+    <value>GPU dédié AMD Radeon</value>
+  </data>
+  <data name="Reason_GPUDetected" xml:space="preserve">
+    <value>GPU détecté</value>
+  </data>
+  <data name="Reason_RAMNotFound" xml:space="preserve">
+    <value>Information RAM non trouvée</value>
+  </data>
+  <data name="Reason_VeryLowRAM" xml:space="preserve">
+    <value>RAM très faible (moins de 8 Go)</value>
+  </data>
+  <data name="Reason_LowRAM" xml:space="preserve">
+    <value>RAM faible (moins de 12 Go)</value>
+  </data>
+  <data name="Reason_AcceptableRAM" xml:space="preserve">
+    <value>RAM acceptable</value>
+  </data>
+  <data name="Reason_GoodRAM" xml:space="preserve">
+    <value>Bonne quantité de RAM</value>
+  </data>
+  <data name="Reason_SharedMemory" xml:space="preserve">
+    <value>Mémoire partagée avec la RAM système</value>
+  </data>
+  <data name="Reason_VRAMNotFound" xml:space="preserve">
+    <value>Information VRAM non trouvée</value>
+  </data>
+  <data name="Reason_VeryLowVRAM" xml:space="preserve">
+    <value>VRAM très faible - probablement mémoire partagée</value>
+  </data>
+  <data name="Reason_LowVRAM" xml:space="preserve">
+    <value>VRAM dédiée faible</value>
+  </data>
+  <data name="Reason_GoodVRAM" xml:space="preserve">
+    <value>Bonne VRAM dédiée</value>
+  </data>
+  <data name="Reason_ARM64" xml:space="preserve">
+    <value>Architecture ARM - non officiellement supportée</value>
+  </data>
+  <data name="Reason_x64" xml:space="preserve">
+    <value>Architecture x86 64 bits - officiellement supportée</value>
+  </data>
+  <data name="Reason_x86" xml:space="preserve">
+    <value>Architecture 32 bits - non supportée</value>
+  </data>
+  <data name="Reason_ArchUnknown" xml:space="preserve">
+    <value>Information d'architecture non claire</value>
+  </data>
+</root>

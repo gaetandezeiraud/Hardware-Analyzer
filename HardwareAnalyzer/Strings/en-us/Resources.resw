@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitleBarText.Text" xml:space="preserve">
+    <value>Hardware Analyzer</value>
+  </data>
+  <data name="DropPromptTitle.Text" xml:space="preserve">
+    <value>Drop screenshot here</value>
+  </data>
+  <data name="DropPromptSubtitle.Text" xml:space="preserve">
+    <value>Windows Settings &gt; System &gt; About</value>
+  </data>
+  <data name="BrowseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Browse for image</value>
+  </data>
+  <data name="BrowseButtonText.Text" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="AnalyzeButtonText.Text" xml:space="preserve">
+    <value>Analyze</value>
+  </data>
+  <data name="LoadingText.Text" xml:space="preserve">
+    <value>Analyzing image...</value>
+  </data>
+  <data name="ResultsDialogTitle" xml:space="preserve">
+    <value>Hardware Analysis Results</value>
+  </data>
+  <data name="DeviceLabel" xml:space="preserve">
+    <value>Device: </value>
+  </data>
+  <data name="GlobalScoreLabel" xml:space="preserve">
+    <value>Global Score: </value>
+  </data>
+  <data name="ScoreExcellent" xml:space="preserve">
+    <value>Excellent hardware configuration!</value>
+  </data>
+  <data name="ScoreGood" xml:space="preserve">
+    <value>Good hardware, minor concerns.</value>
+  </data>
+  <data name="ScoreAcceptable" xml:space="preserve">
+    <value>Acceptable, some limitations.</value>
+  </data>
+  <data name="ScoreBelowAverage" xml:space="preserve">
+    <value>Below average, may have issues.</value>
+  </data>
+  <data name="ScoreSignificantConcerns" xml:space="preserve">
+    <value>Significant hardware concerns.</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorAnalyzePrefix" xml:space="preserve">
+    <value>Failed to analyze image: </value>
+  </data>
+  <data name="OKButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="HW_Processor" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="HW_GraphicsCard" xml:space="preserve">
+    <value>Graphics Card</value>
+  </data>
+  <data name="HW_RAM" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="HW_VideoMemory" xml:space="preserve">
+    <value>Video Memory</value>
+  </data>
+  <data name="HW_Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="Reason_CPUNotFound" xml:space="preserve">
+    <value>CPU information not found</value>
+  </data>
+  <data name="Reason_QualcommARM" xml:space="preserve">
+    <value>Qualcomm ARM processor - limited compatibility</value>
+  </data>
+  <data name="Reason_ModernIntel" xml:space="preserve">
+    <value>Modern Intel CPU</value>
+  </data>
+  <data name="Reason_OlderIntel" xml:space="preserve">
+    <value>Older Intel CPU (pre-2020)</value>
+  </data>
+  <data name="Reason_ModernRyzen" xml:space="preserve">
+    <value>Modern AMD Ryzen CPU</value>
+  </data>
+  <data name="Reason_OlderRyzen" xml:space="preserve">
+    <value>Older AMD Ryzen (pre-2020)</value>
+  </data>
+  <data name="Reason_LowPerfCPU" xml:space="preserve">
+    <value>Low-performance CPU family</value>
+  </data>
+  <data name="Reason_VeryOldCPU" xml:space="preserve">
+    <value>Very old CPU (Core 2 era)</value>
+  </data>
+  <data name="Reason_CPUDetected" xml:space="preserve">
+    <value>CPU detected</value>
+  </data>
+  <data name="Reason_GPUNotFound" xml:space="preserve">
+    <value>GPU information not found</value>
+  </data>
+  <data name="Reason_QualcommAdreno" xml:space="preserve">
+    <value>Qualcomm Adreno GPU - ARM architecture</value>
+  </data>
+  <data name="Reason_IntelArc" xml:space="preserve">
+    <value>Intel Arc dedicated GPU</value>
+  </data>
+  <data name="Reason_IntelIris" xml:space="preserve">
+    <value>Intel Iris integrated graphics</value>
+  </data>
+  <data name="Reason_IntelUHD" xml:space="preserve">
+    <value>Intel UHD integrated graphics</value>
+  </data>
+  <data name="Reason_IntelIntegrated" xml:space="preserve">
+    <value>Intel integrated graphics</value>
+  </data>
+  <data name="Reason_NVIDIADedicated" xml:space="preserve">
+    <value>NVIDIA dedicated GPU</value>
+  </data>
+  <data name="Reason_AMDVega" xml:space="preserve">
+    <value>AMD integrated Vega graphics</value>
+  </data>
+  <data name="Reason_AMDRadeon" xml:space="preserve">
+    <value>AMD Radeon dedicated GPU</value>
+  </data>
+  <data name="Reason_GPUDetected" xml:space="preserve">
+    <value>GPU detected</value>
+  </data>
+  <data name="Reason_RAMNotFound" xml:space="preserve">
+    <value>RAM information not found</value>
+  </data>
+  <data name="Reason_VeryLowRAM" xml:space="preserve">
+    <value>Very low RAM (less than 8 GB)</value>
+  </data>
+  <data name="Reason_LowRAM" xml:space="preserve">
+    <value>Low RAM (less than 12 GB)</value>
+  </data>
+  <data name="Reason_AcceptableRAM" xml:space="preserve">
+    <value>Acceptable RAM</value>
+  </data>
+  <data name="Reason_GoodRAM" xml:space="preserve">
+    <value>Good amount of RAM</value>
+  </data>
+  <data name="Reason_SharedMemory" xml:space="preserve">
+    <value>Shared memory with system RAM</value>
+  </data>
+  <data name="Reason_VRAMNotFound" xml:space="preserve">
+    <value>VRAM information not found</value>
+  </data>
+  <data name="Reason_VeryLowVRAM" xml:space="preserve">
+    <value>Very low VRAM - likely shared memory</value>
+  </data>
+  <data name="Reason_LowVRAM" xml:space="preserve">
+    <value>Low dedicated VRAM</value>
+  </data>
+  <data name="Reason_GoodVRAM" xml:space="preserve">
+    <value>Good dedicated VRAM</value>
+  </data>
+  <data name="Reason_ARM64" xml:space="preserve">
+    <value>ARM architecture - not officially supported</value>
+  </data>
+  <data name="Reason_x64" xml:space="preserve">
+    <value>64-bit x86 architecture - officially supported</value>
+  </data>
+  <data name="Reason_x86" xml:space="preserve">
+    <value>32-bit architecture - not supported</value>
+  </data>
+  <data name="Reason_ArchUnknown" xml:space="preserve">
+    <value>Architecture information not clear</value>
+  </data>
+</root>
