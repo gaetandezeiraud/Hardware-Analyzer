@@ -5,8 +5,10 @@
 #endif
 
 #include "HardwareInfo.h"
+#include "MacOSHardwareInfo.h"
 #include "OcrService.h"
 #include "ResultsDialog.h"
+#include "MacOSResultsDialog.h"
 
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::ApplicationModel::Resources;
@@ -142,6 +144,23 @@ namespace winrt::HardwareAnalyzer::implementation
 		if (!m_currentFile)
 			co_return;
 
+		if (m_selectedPlatform == ::HardwareAnalyzer::TargetPlatform::macOS)
+		{
+			co_await AnalyzeMacOSImage();
+		}
+		else
+		{
+			co_await AnalyzeWindowsImage();
+		}
+
+		co_return;
+	}
+
+	Windows::Foundation::IAsyncAction MainWindow::AnalyzeWindowsImage()
+	{
+		if (!m_currentFile)
+			co_return;
+
 		auto dispatcherQueue = Microsoft::UI::Dispatching::DispatcherQueue::GetForCurrentThread();
 
 		// Show loading
@@ -190,6 +209,73 @@ namespace winrt::HardwareAnalyzer::implementation
 		}
 
 		co_return;
+	}
+
+	Windows::Foundation::IAsyncAction MainWindow::AnalyzeMacOSImage()
+	{
+		if (!m_currentFile)
+			co_return;
+
+		auto dispatcherQueue = Microsoft::UI::Dispatching::DispatcherQueue::GetForCurrentThread();
+
+		// Show loading
+		LoadingPanel().Visibility(Visibility::Visible);
+		PreviewImage().Visibility(Visibility::Collapsed);
+		AnalyzeButton().IsEnabled(false);
+
+		try
+		{
+			// Perform OCR
+			auto ocrText = co_await OcrService::PerformOcrAsync(m_currentFile);
+			std::wstring text(ocrText.c_str());
+
+			// Parse macOS hardware info
+			auto info = ::HardwareAnalyzer::MacOSHardwareAnalyzerService::ParseMacOSOcrText(text);
+
+			// Analyze macOS hardware
+			auto results = ::HardwareAnalyzer::MacOSHardwareAnalyzerService::AnalyzeMacOSHardware(info);
+
+			// Calculate score
+			int score = ::HardwareAnalyzer::MacOSHardwareAnalyzerService::CalculateGlobalScore(results);
+
+			// Show results on UI thread
+			dispatcherQueue.TryEnqueue([this, info, results, score]() {
+				LoadingPanel().Visibility(Visibility::Collapsed);
+				PreviewImage().Visibility(Visibility::Visible);
+				AnalyzeButton().IsEnabled(true);
+				::HardwareAnalyzer::MacOSResultsDialog::Show(this->Content().as<UIElement>().XamlRoot(), info, results, score);
+				});
+		}
+		catch (const winrt::hresult_error& ex)
+		{
+			dispatcherQueue.TryEnqueue([this, ex]() {
+				LoadingPanel().Visibility(Visibility::Collapsed);
+				PreviewImage().Visibility(Visibility::Visible);
+				AnalyzeButton().IsEnabled(true);
+
+				ResourceLoader resourceLoader;
+				ContentDialog errorDlg;
+				errorDlg.XamlRoot(this->Content().as<UIElement>().XamlRoot());
+				errorDlg.Title(box_value(resourceLoader.GetString(L"ErrorTitle")));
+				errorDlg.Content(box_value(resourceLoader.GetString(L"ErrorAnalyzePrefix") + ex.message()));
+				errorDlg.CloseButtonText(resourceLoader.GetString(L"OKButton"));
+				errorDlg.ShowAsync();
+				});
+		}
+
+		co_return;
+	}
+
+	void MainWindow::PlatformSelector_SelectionChanged(const winrt::Windows::Foundation::IInspectable& sender, const Controls::SelectionChangedEventArgs&)
+	{
+		// Get the ComboBox from sender since PlatformSelector might not be generated yet
+		if (auto comboBox = sender.try_as<Controls::ComboBox>())
+		{
+			int selectedIndex = comboBox.SelectedIndex();
+			m_selectedPlatform = (selectedIndex == 1) 
+				? ::HardwareAnalyzer::TargetPlatform::macOS 
+				: ::HardwareAnalyzer::TargetPlatform::Windows;
+		}
 	}
 
 	Microsoft::UI::Windowing::AppWindow MainWindow::GetAppWindowForCurrentWindow()

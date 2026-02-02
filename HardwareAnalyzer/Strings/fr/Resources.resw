@@ -288,4 +288,65 @@
   <data name="Reason_ArchUnknown" xml:space="preserve">
     <value>Information d'architecture non claire</value>
   </data>
+  <!-- macOS specific strings -->
+  <data name="MacOSResultsDialogTitle" xml:space="preserve">
+    <value>Résultats de l'analyse matérielle macOS</value>
+  </data>
+  <data name="HW_Chip" xml:space="preserve">
+    <value>Puce</value>
+  </data>
+  <data name="HW_Memory" xml:space="preserve">
+    <value>Mémoire</value>
+  </data>
+  <data name="HW_MacOSVersion" xml:space="preserve">
+    <value>Version macOS</value>
+  </data>
+  <data name="Reason_ChipNotFound" xml:space="preserve">
+    <value>Information de puce non trouvée</value>
+  </data>
+  <data name="Reason_IntelMacNotSupported" xml:space="preserve">
+    <value>Mac Intel non supporté - Apple Silicon requis</value>
+  </data>
+  <data name="Reason_AppleSiliconSupported" xml:space="preserve">
+    <value>Puce Apple Silicon - entièrement supportée</value>
+  </data>
+  <data name="Reason_ChipUnknown" xml:space="preserve">
+    <value>Type de puce inconnu</value>
+  </data>
+  <data name="Reason_MemoryNotFound" xml:space="preserve">
+    <value>Information de mémoire non trouvée</value>
+  </data>
+  <data name="Reason_MacVeryLowMemory" xml:space="preserve">
+    <value>Mémoire très faible (moins de 6 Go)</value>
+  </data>
+  <data name="Reason_MacLowMemory" xml:space="preserve">
+    <value>Mémoire faible (moins de 8 Go)</value>
+  </data>
+  <data name="Reason_MacAcceptableMemory" xml:space="preserve">
+    <value>Mémoire acceptable</value>
+  </data>
+  <data name="Reason_MacGoodMemory" xml:space="preserve">
+    <value>Bonne quantité de mémoire</value>
+  </data>
+  <data name="Reason_MacOSVersionNotFound" xml:space="preserve">
+    <value>Version macOS non trouvée</value>
+  </data>
+  <data name="Reason_MacOSTooOld" xml:space="preserve">
+    <value>Version macOS trop ancienne - minimum macOS 15 (Sonoma) requis</value>
+  </data>
+  <data name="Reason_MacOSSupported" xml:space="preserve">
+    <value>Version macOS supportée</value>
+  </data>
+  <data name="PlatformSelectorWindows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="PlatformSelectormacOS" xml:space="preserve">
+    <value>macOS</value>
+  </data>
+  <data name="DropPromptSubtitleMacOS.Text" xml:space="preserve">
+    <value>Menu Apple &gt; À propos de ce Mac</value>
+  </data>
+  <data name="ScoreNoDataExtracted" xml:space="preserve">
+    <value>Impossible d'extraire les informations matérielles de l'image.</value>
+  </data>
 </root>

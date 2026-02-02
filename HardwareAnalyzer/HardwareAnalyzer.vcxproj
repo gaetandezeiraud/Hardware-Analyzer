@@ -142,6 +142,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HardwareInfo.h" />
+    <ClInclude Include="MacOSHardwareInfo.h" />
+    <ClInclude Include="MacOSResultsDialog.h" />
     <ClInclude Include="MainWindow.xaml.h">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClInclude>
@@ -157,6 +159,7 @@
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MacOSResultsDialog.cpp" />
     <ClCompile Include="MainWindow.xaml.cpp">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClCompile>

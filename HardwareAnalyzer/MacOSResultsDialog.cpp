@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "ResultsDialog.h"
+#include "MacOSResultsDialog.h"
 
 using namespace winrt;
 using namespace winrt::Microsoft::Windows::ApplicationModel::Resources;
@@ -8,9 +8,9 @@ using namespace winrt::Microsoft::UI::Xaml::Controls;
 
 namespace HardwareAnalyzer
 {
-	void ResultsDialog::Show(
+	void MacOSResultsDialog::Show(
 		const winrt::Microsoft::UI::Xaml::XamlRoot& xamlRoot,
-		const HardwareInfo& info,
+		const MacOSHardwareInfo& info,
 		const std::vector<HardwareCheckResult>& results,
 		int score)
 	{
@@ -18,12 +18,32 @@ namespace HardwareAnalyzer
 
 		ContentDialog dlg;
 		dlg.XamlRoot(xamlRoot);
-		dlg.Title(box_value(resourceLoader.GetString(L"ResultsDialogTitle")));
+		dlg.Title(box_value(resourceLoader.GetString(L"MacOSResultsDialogTitle")));
 
 		// Build content
 		StackPanel mainPanel;
 		mainPanel.Spacing(10);
 		mainPanel.Padding(ThicknessHelper::FromLengths(0, 10, 0, 0));
+
+		// Device info header (MacBook Pro, MacBook Air, etc.)
+		if (!info.DeviceName.empty())
+		{
+			StackPanel devicePanel;
+			devicePanel.HorizontalAlignment(HorizontalAlignment::Center);
+			devicePanel.Margin(ThicknessHelper::FromLengths(0, 0, 0, 15));
+
+			TextBlock deviceText;
+			std::wstring deviceStr = info.DeviceName;
+			if (!info.DeviceYear.empty())
+				deviceStr += L" (" + info.DeviceYear + L")";
+			deviceText.Text(hstring{ deviceStr });
+			deviceText.FontSize(18);
+			deviceText.FontWeight(Windows::UI::Text::FontWeights::SemiBold());
+			deviceText.HorizontalAlignment(HorizontalAlignment::Center);
+			devicePanel.Children().Append(deviceText);
+
+			mainPanel.Children().Append(devicePanel);
+		}
 
 		// Results list
 		for (const auto& result : results)
@@ -68,16 +88,12 @@ namespace HardwareAnalyzer
 			// Name
 			TextBlock nameText;
 			hstring localizedName{ result.Name };
-			if (result.Name == L"Processor")
-				localizedName = resourceLoader.GetString(L"HW_Processor");
-			else if (result.Name == L"Graphics Card")
-				localizedName = resourceLoader.GetString(L"HW_GraphicsCard");
-			else if (result.Name == L"RAM")
-				localizedName = resourceLoader.GetString(L"HW_RAM");
-			else if (result.Name == L"Video Memory")
-				localizedName = resourceLoader.GetString(L"HW_VideoMemory");
-			else if (result.Name == L"Architecture")
-				localizedName = resourceLoader.GetString(L"HW_Architecture");
+			if (result.Name == L"Chip")
+				localizedName = resourceLoader.GetString(L"HW_Chip");
+			else if (result.Name == L"Memory")
+				localizedName = resourceLoader.GetString(L"HW_Memory");
+			else if (result.Name == L"macOS Version")
+				localizedName = resourceLoader.GetString(L"HW_MacOSVersion");
 			nameText.Text(localizedName);
 			nameText.FontWeight(Windows::UI::Text::FontWeights::SemiBold());
 			nameText.VerticalAlignment(VerticalAlignment::Center);

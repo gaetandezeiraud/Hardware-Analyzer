@@ -103,6 +103,17 @@ mc:Ignorable="d">
                     </Button>
                 </StackPanel>
 
+                <!-- Platform Selector -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <ComboBox x:Name="PlatformSelector"
+                    SelectionChanged="PlatformSelector_SelectionChanged"
+                    SelectedIndex="0"
+                    MinWidth="120">
+                        <ComboBoxItem x:Uid="PlatformSelectorWindows" Content="Windows" />
+                        <ComboBoxItem x:Uid="PlatformSelectormacOS" Content="macOS" />
+                    </ComboBox>
+                </StackPanel>
+
                 <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10">
                     <Button x:Name="AnalyzeButton"
 						Style="{ThemeResource AccentButtonStyle}"

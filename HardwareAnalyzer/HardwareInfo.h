@@ -257,6 +257,33 @@ namespace HardwareAnalyzer
 
 		static int CalculateGlobalScore(const std::vector<HardwareCheckResult>& results)
 		{
+			// Count how many results have actual values (not "?")
+			int validResults = 0;
+			for (const auto& result : results)
+			{
+				if (result.Value != L"?")
+					validResults++;
+			}
+
+			// If no data could be extracted, return -1 to indicate no result possible
+			if (validResults == 0)
+			{
+				return -1;
+			}
+
+			// Check for unsupported architecture first - return 0 immediately
+			for (const auto& result : results)
+			{
+				if (result.Value == L"?")
+					continue;
+
+				// If Architecture is Bad (ARM or x86), the system is not supported
+				if (result.Name == L"Architecture" && result.Status == StatusLevel::Bad)
+				{
+					return 0;
+				}
+			}
+
 			int score = 100;
 			for (const auto& result : results)
 			{
