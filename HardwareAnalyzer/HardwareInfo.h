@@ -111,15 +111,78 @@ namespace HardwareAnalyzer
 
 			// Extract GPU - multi-language
 			// English: Graphics card, French: Carte graphique, German: Grafikkarte
-			std::wregex gpuRegex(LR"((?:Graphics card|Carte graphique|Grafikkarte|GPU|Tarjeta gr[aá]fica)\s*[:\-]?\s*(.+?)(?:\n|$))", std::regex::icase);
+			// First, check for "Multiple GPUs" pattern in the header cards (Windows 11 style)
+			std::wregex multiGpuRegex(LR"((?:Plusieurs\s+GPU|Multiple\s+GPU|Mehrere\s+GPU)[^\n]*)", std::regex::icase);
 			std::wsmatch gpuMatch;
-			if (std::regex_search(normalizedText, gpuMatch, gpuRegex))
+			
+			// Before parsing GPU, try to extract VRAM from the GPU card header (Windows 11 style: "Carte graphique 16 GB" or "128 MB")
+			if (info.VramGB == 0)
 			{
-				info.GPU = gpuMatch[1].str();
-				info.GPU.erase(info.GPU.find_last_not_of(L" \t\r\n") + 1);
+				std::wregex gpuCardVramRegex(LR"((?:Graphics card|Carte graphique|Grafikkarte)\s*[:\-]?\s*(\d+)\s*(GB|Go|MB|Mo))", std::regex::icase);
+				std::wsmatch gpuCardVramMatch;
+				if (std::regex_search(normalizedText, gpuCardVramMatch, gpuCardVramRegex))
+				{
+					try {
+						info.VramGB = std::stod(gpuCardVramMatch[1].str());
+						std::wstring unit = gpuCardVramMatch[2].str();
+						std::transform(unit.begin(), unit.end(), unit.begin(), ::towlower);
+						if (unit == L"mb" || unit == L"mo") {
+							info.VramGB /= 1024.0;
+						}
+						info.VRAM = gpuCardVramMatch[1].str() + L" " + gpuCardVramMatch[2].str();
+					}
+					catch (...) {}
+				}
+			}
+			
+			if (std::regex_search(normalizedText, gpuMatch, multiGpuRegex))
+			{
+				info.GPU = L"[MULTIPLE_GPU]";
+			}
+			else
+			{
+				// Try standard GPU extraction
+				std::wregex gpuRegex(LR"((?:Graphics card|Carte graphique|Grafikkarte|Tarjeta gr[aá]fica)\s*[:\-]?\s*(.+?)(?:\n|$))", std::regex::icase);
+				if (std::regex_search(normalizedText, gpuMatch, gpuRegex))
+				{
+					info.GPU = gpuMatch[1].str();
+					info.GPU.erase(info.GPU.find_last_not_of(L" \t\r\n") + 1);
+
+					// Clean up GPU value - stop at known non-GPU patterns
+					// This handles OCR that concatenates multiple fields
+					size_t cutPos = std::wstring::npos;
+					std::vector<std::wstring> stopPatterns = {
+						L"Plusieurs", L"Multiple", L"Mémoire", L"Memory",
+						L"Processeur", L"Processor", L"Nom de", L"Device name"
+					};
+					for (const auto& pattern : stopPatterns)
+					{
+						size_t pos = info.GPU.find(pattern);
+						if (pos != std::wstring::npos && (cutPos == std::wstring::npos || pos < cutPos))
+						{
+							cutPos = pos;
+						}
+					}
+					if (cutPos != std::wstring::npos && cutPos > 0)
+					{
+						info.GPU = info.GPU.substr(0, cutPos);
+						info.GPU.erase(info.GPU.find_last_not_of(L" \t\r\n") + 1);
+					}
+
+					// If after cleanup, GPU only contains size info (like "16 GB"), check for multiple GPUs
+					std::wregex sizeOnlyRegex(LR"(^\d+\s*(GB|Go)\s*$)", std::regex::icase);
+					if (std::regex_match(info.GPU, sizeOnlyRegex))
+					{
+						// Check if "Plusieurs GPU" is elsewhere in text
+						if (std::regex_search(normalizedText, multiGpuRegex))
+						{
+							info.GPU = L"[MULTIPLE_GPU]";
+						}
+					}
+				}
 			}
 
-			// Check for GPU in text (NVIDIA, AMD, Intel patterns)
+			// Check for GPU in text (NVIDIA, AMD, Intel patterns) if still empty
 			if (info.GPU.empty())
 			{
 				std::wregex gpuPatternRegex(LR"((NVIDIA|GeForce|Radeon|Intel.*(?:UHD|Iris|Arc)|AMD.*Radeon|Qualcomm.*Adreno)[^\n]*)", std::regex::icase);
@@ -396,6 +459,16 @@ namespace HardwareAnalyzer
 
 			std::wstring gpuLower = gpu;
 			std::transform(gpuLower.begin(), gpuLower.end(), gpuLower.begin(), ::towlower);
+
+			// Check for multiple GPUs (usually means integrated + dedicated = good)
+			if (gpu == L"[MULTIPLE_GPU]" ||
+				gpuLower.find(L"plusieurs") != std::wstring::npos ||
+				gpuLower.find(L"multiple") != std::wstring::npos ||
+				gpuLower.find(L"mehrere") != std::wstring::npos)
+			{
+				reasonKey = L"Reason_MultipleGPU";
+				return StatusLevel::Good;
+			}
 
 			// Check for Qualcomm Adreno (bad - ARM)
 			if (gpuLower.find(L"adreno") != std::wstring::npos ||

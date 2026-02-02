@@ -89,7 +89,11 @@ namespace HardwareAnalyzer
 			valuePanel.VerticalAlignment(VerticalAlignment::Center);
 
 			TextBlock valueText;
-			valueText.Text(result.Value);
+			// Localize special values
+			hstring displayValue{ result.Value };
+			if (result.Value == L"[MULTIPLE_GPU]")
+				displayValue = resourceLoader.GetString(L"GPU_MultipleInstalled");
+			valueText.Text(displayValue);
 			valueText.TextTrimming(TextTrimming::CharacterEllipsis);
 			valueText.MaxWidth(300);
 			valuePanel.Children().Append(valueText);

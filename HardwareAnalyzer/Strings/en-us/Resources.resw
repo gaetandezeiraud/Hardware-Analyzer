@@ -187,6 +187,12 @@
   <data name="Reason_GPUDetected" xml:space="preserve">
     <value>GPU detected</value>
   </data>
+  <data name="Reason_MultipleGPU" xml:space="preserve">
+    <value>Multiple GPUs installed (integrated + dedicated)</value>
+  </data>
+  <data name="GPU_MultipleInstalled" xml:space="preserve">
+    <value>Multiple GPUs installed</value>
+  </data>
   <data name="Reason_RAMNotFound" xml:space="preserve">
     <value>RAM information not found</value>
   </data>
