@@ -4,6 +4,11 @@
 #include "MainWindow.g.cpp"
 #endif
 
+#include <winrt/Windows.ApplicationModel.DataTransfer.h>
+#include <winrt/Windows.Storage.Streams.h>
+#include <winrt/Windows.Storage.h>
+#include <filesystem>
+
 #include "HardwareInfo.h"
 #include "MacOSHardwareInfo.h"
 #include "OcrService.h"
@@ -67,6 +72,12 @@ namespace winrt::HardwareAnalyzer::implementation
 	void MainWindow::DropZone_DragLeave(const winrt::Windows::Foundation::IInspectable&, const DragEventArgs&)
 	{
 		DropZone().BorderBrush(Microsoft::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Gray()));
+	}
+
+	void MainWindow::CtrlV_Invoked(const Microsoft::UI::Xaml::Input::KeyboardAccelerator&, const Microsoft::UI::Xaml::Input::KeyboardAcceleratorInvokedEventArgs& args)
+	{
+		args.Handled(true);
+		ProcessClipboard();
 	}
 
 	fire_and_forget MainWindow::OpenFilePicker()
@@ -137,6 +148,57 @@ namespace winrt::HardwareAnalyzer::implementation
 		PreviewImage().Visibility(Visibility::Visible);
 		DropPrompt().Visibility(Visibility::Collapsed);
 		AnalyzeButton().IsEnabled(true);
+	}
+
+	fire_and_forget MainWindow::ProcessClipboard()
+	{
+		using namespace winrt::Windows::ApplicationModel::DataTransfer;
+		using namespace winrt::Windows::Storage;
+
+		auto dataPackageView = Clipboard::GetContent();
+
+		// Case 1: The user copied actual image file(s) from File Explorer
+		if (dataPackageView.Contains(StandardDataFormats::StorageItems()))
+		{
+			auto items{ co_await dataPackageView.GetStorageItemsAsync() };
+			for (auto&& item : items)
+			{
+				if (item.IsOfType(StorageItemTypes::File))
+				{
+					auto file = item.as<StorageFile>();
+					auto ext = file.FileType();
+					if (ext == L".png" || ext == L".jpg" || ext == L".jpeg" ||
+						ext == L".bmp" || ext == L".gif" ||
+						ext == L".PNG" || ext == L".JPG" || ext == L".JPEG" ||
+						ext == L".BMP" || ext == L".GIF")
+					{
+						LoadImageFile(file);
+						break; // Only load the first image we find
+					}
+				}
+			}
+		}
+		// Case 2: The user pasted a raw bitmap (e.g., from Snipping Tool or Print Screen)
+		else if (dataPackageView.Contains(StandardDataFormats::Bitmap()))
+		{
+			auto bitmapRef = co_await dataPackageView.GetBitmapAsync();
+			auto stream = co_await bitmapRef.OpenReadAsync();
+
+			// Create a temporary file to save the clipboard image
+			std::wstring tempPath = std::filesystem::temp_directory_path().wstring();
+			StorageFolder tempFolder = co_await StorageFolder::GetFolderFromPathAsync(tempPath);
+			StorageFile tempFile = co_await tempFolder.CreateFileAsync(L"pasted_screenshot.png", CreationCollisionOption::ReplaceExisting);
+
+			// Copy the stream to the temp file
+			auto outStream = co_await tempFile.OpenAsync(FileAccessMode::ReadWrite);
+			co_await Streams::RandomAccessStream::CopyAsync(stream.GetInputStreamAt(0), outStream.GetOutputStreamAt(0));
+
+			// Close streams to free up the file lock before OCR runs
+			outStream.Close();
+			stream.Close();
+
+			LoadImageFile(tempFile);
+		}
 	}
 
 	Windows::Foundation::IAsyncAction MainWindow::AnalyzeImage()
@@ -272,8 +334,8 @@ namespace winrt::HardwareAnalyzer::implementation
 		if (auto comboBox = sender.try_as<Controls::ComboBox>())
 		{
 			int selectedIndex = comboBox.SelectedIndex();
-			m_selectedPlatform = (selectedIndex == 1) 
-				? ::HardwareAnalyzer::TargetPlatform::macOS 
+			m_selectedPlatform = (selectedIndex == 1)
+				? ::HardwareAnalyzer::TargetPlatform::macOS
 				: ::HardwareAnalyzer::TargetPlatform::Windows;
 		}
 	}

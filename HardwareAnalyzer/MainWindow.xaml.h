@@ -24,6 +24,8 @@ namespace winrt::HardwareAnalyzer::implementation
 			const Microsoft::UI::Xaml::DragEventArgs& e);
 		void DropZone_DragLeave(const Windows::Foundation::IInspectable& sender,
 			const Microsoft::UI::Xaml::DragEventArgs& e);
+		void CtrlV_Invoked(const Microsoft::UI::Xaml::Input::KeyboardAccelerator& sender,
+			const Microsoft::UI::Xaml::Input::KeyboardAcceleratorInvokedEventArgs& args);
 
 		void PlatformSelector_SelectionChanged(const Windows::Foundation::IInspectable& sender,
 			const Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs& e);
@@ -32,6 +34,7 @@ namespace winrt::HardwareAnalyzer::implementation
 		fire_and_forget OpenFilePicker();
 		fire_and_forget ProcessDroppedFile(const Microsoft::UI::Xaml::DragEventArgs& e);
 		fire_and_forget LoadImageFile(Windows::Storage::StorageFile file);
+		winrt::fire_and_forget ProcessClipboard();
 		Windows::Foundation::IAsyncAction AnalyzeImage();
 		Windows::Foundation::IAsyncAction AnalyzeWindowsImage();
 		Windows::Foundation::IAsyncAction AnalyzeMacOSImage();
