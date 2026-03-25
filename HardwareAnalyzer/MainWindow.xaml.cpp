@@ -40,6 +40,13 @@ namespace winrt::HardwareAnalyzer::implementation
 		auto appWindow = GetAppWindowForCurrentWindow();
 		appWindow.ResizeClient({ 600, 600 });
 
+		HICON hIcon = LoadIcon(GetModuleHandle(nullptr), MAKEINTRESOURCE(101));
+		if (hIcon != nullptr)
+		{
+			Microsoft::UI::IconId iconId = Microsoft::UI::GetIconIdFromIcon(hIcon);
+			appWindow.SetIcon(iconId);
+		}
+
 		InitializeComponent();
 		InitializeMica(this);
 
